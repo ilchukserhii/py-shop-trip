@@ -12,7 +12,7 @@ class Customer:
     name: str
     products_to_buy: dict[str, int]
     location: tuple[int, int]
-    money: int
+    money: float
     car: Car
     where_to_go: list[tuple[Shop, float]] = field(default_factory=list)
 

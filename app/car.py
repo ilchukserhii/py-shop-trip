@@ -20,7 +20,7 @@ class Car:
     def ride_to(self, owner: Customer, location: Shop | None = None) -> str:
         if location is None:
             print(f"{owner.name} rides home")
-            return f"{owner.name} now has {round(owner.money, 2)} dollars"
+            return f"{owner.name} now has {owner.money:.2f} dollars"
         trip_cost = (
             self.trip_fuel_consumption(owner.location, location.location)
         )

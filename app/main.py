@@ -3,10 +3,15 @@ import json
 from app.car import Car
 from app.customer import Customer
 from app.shop import Shop
+from pathlib import Path
+
+
+BASE_DIR = Path(__file__).resolve().parent
+CONFIG_PATH = BASE_DIR / "config.json"
 
 
 def shop_trip() -> None:
-    with open("app/config.json") as f:
+    with open(CONFIG_PATH) as f:
         data = json.load(f)
         Car.fuel_price = data["FUEL_PRICE"]
         list_of_customers = []
@@ -33,6 +38,8 @@ def shop_trip() -> None:
             for shop in list_of_shops:
                 print(customer.calculate_trip(shop))
 
+            if not customer.where_to_go:
+                continue
             cheapest_shop, cheapest_price = min(
                 customer.where_to_go, key=lambda x: x[1]
             )
