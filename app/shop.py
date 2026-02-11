@@ -16,7 +16,7 @@ class Shop:
     def customer_bill(self, customer: Customer) -> None:
         now = datetime.datetime.now()
         total_purchase_cost = 0
-        print(f"Date: {now.strftime("%d/%m/%Y %H:%M:%S")}")
+        print(f"Date: {now.strftime('%d/%m/%Y %H:%M:%S')}")
         print(f"Thanks, {customer.name}, for your purchase!")
         print("You have bought:")
         for product, quantity in customer.products_to_buy.items():

@@ -5,7 +5,7 @@ from app.customer import Customer
 from app.shop import Shop
 
 
-def shop_trip():
+def shop_trip() -> None:
     with open("app/config.json") as f:
         data = json.load(f)
         Car.fuel_price = data["FUEL_PRICE"]
@@ -16,8 +16,12 @@ def shop_trip():
             products = customer["product_cart"]
             location = customer["location"]
             money = customer["money"]
-            car = Car(customer["car"]["brand"], customer["car"]["fuel_consumption"])
-            list_of_customers.append(Customer(name, products, location, money, car))
+            car = Car(
+                customer["car"]["brand"], customer["car"]["fuel_consumption"]
+            )
+            list_of_customers.append(
+                Customer(name, products, location, money, car)
+            )
         for shop in data["shops"]:
             name = shop["name"]
             location = shop["location"]
@@ -40,4 +44,5 @@ def shop_trip():
                 print(customer.car.ride_to(customer))
                 print()
             else:
-                print(f"{customer.name} doesn't have enough money to make a purchase in any shop")
+                print(f"{customer.name} doesn't have "
+                      f"enough money to make a purchase in any shop")
