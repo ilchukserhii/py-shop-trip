@@ -1,5 +1,5 @@
 from __future__ import annotations
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -14,11 +14,9 @@ class Customer:
     location: tuple[int, int]
     money: int
     car: Car
-    where_to_go: list[tuple[Shop, float]] = None
+    where_to_go: list[tuple[Shop, float]] = field(default_factory=list)
 
     def calculate_trip(self, shop: Shop) -> str:
-        if self.where_to_go is None:
-            self.where_to_go = []
         shop_travel_price = (
             self.car.trip_fuel_consumption(self.location, shop.location)
         )
@@ -30,4 +28,4 @@ class Customer:
                       + round(shop_travel_price, 2))
         self.where_to_go.append((shop, trip_price))
 
-        return f"{self.name}'s trip to the {shop.name} costs {trip_price}"
+        return f"{self.name}'s trip to the {shop.name} costs {trip_price:.2f}"

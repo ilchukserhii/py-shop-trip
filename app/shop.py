@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 class Shop:
     name: str
     location: tuple[int, int]
-    products: dict[str, int]
+    products: dict[str, int | float]
 
     def customer_bill(self, customer: Customer) -> None:
         now = datetime.datetime.now()
@@ -21,7 +21,7 @@ class Shop:
         print("You have bought:")
         for product, quantity in customer.products_to_buy.items():
             one_product_price = self.products[product] * quantity
-            if one_product_price.is_integer():
+            if isinstance(one_product_price, float) and one_product_price.is_integer():
                 one_product_price = int(one_product_price)
             print(f"{quantity} {product}s for {one_product_price} dollars")
             total_purchase_cost += one_product_price
